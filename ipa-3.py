@@ -54,7 +54,7 @@ def relationship_status(from_member, to_member, social_graph):
     elif to_member in social_graph[from_member]["following"] and from_member not in social_graph[to_member]["following"]: 
         relationship = "follower"
     elif to_member not in social_graph[from_member]["following"] and from_member in social_graph[to_member]["following"]: 
-        relationship = "followerd by"
+        relationship = "followed by"
     else:
         relationship = "no relationship"  
         
