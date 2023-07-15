@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[23]:
+# In[3]:
 
 
 '''Individual Programming Assignment 2
@@ -44,23 +44,22 @@ def shift_letter(letter, shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     if letter.isalpha():
-        if (ord(letter)+shift)>90:
-            shifted_letter=chr(((ord(letter)+shift)-26))
-        else:
-            shifted_letter=chr(ord(letter)+shift)
+        letter_code = ord(letter) - 65  
+        shifted_code = (letter_code + shift) % 26  
+        shifted_letter = chr(shifted_code + 65)  
     else:
-        shifted_letter = " "
-    
-    return str(shifted_letter)
+        shifted_letter = " "  
+
+    return shifted_letter
 
 
-# In[24]:
+# In[5]:
 
 
-shift_letter("A", 0)
+shift_letter("A", 1000)
 
 
-# In[50]:
+# In[6]:
 
 
 def caesar_cipher(message, shift):
@@ -83,24 +82,29 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    new_message = message.replace(" "," ")
-    mess = new_message.lower()
-    statement = ""
-    for char in mess:
-        statement += chr((ord(char) + int(shift)))
-        continue
-        
-    statement_new = statement.replace("!"," ")
-    return str(statement_new.upper())
+    shifted_message = ""
+    for char in message:
+        if char.isalpha():
+            if char.isupper():
+                shifted_char_code = (ord(char) - 65 + shift) % 26 + 65
+                shifted_char = chr(shifted_char_code)
+            else:
+                shifted_char_code = (ord(char) - 97 + shift) % 26 + 97
+                shifted_char = chr(shifted_char_code)
+        else:
+            shifted_char = char
+        shifted_message += shifted_char
+
+    return shifted_message
 
 
-# In[51]:
+# In[7]:
 
 
 caesar_cipher("HI WORLD", 1)
 
 
-# In[22]:
+# In[8]:
 
 
 def shift_by_letter(letter, letter_shift):
@@ -131,17 +135,20 @@ def shift_by_letter(letter, letter_shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    letters=list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    new_letter = letters.index(letter)
-    new_letter_shift = letters.index(letter_shift)
-    if letter.isalpha() and letter_shift.isalpha:
-        statement = letters[new_letter+new_letter_shift]
+    letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+    if letter.isalpha() and letter_shift.isalpha():
+        letter_index = letters.index(letter)
+        shift_index = letters.index(letter_shift)
+        shifted_index = (letter_index + shift_index) % 26
+        shifted_letter = letters[shifted_index]
     else:
-        statement = " "
-    return str(statement)
+        shifted_letter = " "
+
+    return shifted_letter
 
 
-# In[27]:
+# In[9]:
 
 
 shift_by_letter("B", "K")
@@ -278,7 +285,13 @@ def scytale_cipher(message, shift):
     return encoded_message
 
 
-# In[ ]:
+# In[2]:
+
+
+scytale_cipher("BOSTON_CELTICS", 5)
+
+
+# In[3]:
 
 
 def scytale_decipher(message, shift):
@@ -320,4 +333,16 @@ def scytale_decipher(message, shift):
     
     
     return decoded_message
+
+
+# In[4]:
+
+
+scytale_decipher("BT_LCOOCTSSNEI_", 5)
+
+
+# In[ ]:
+
+
+
 
