@@ -139,7 +139,7 @@ def interest(principal, rate, periods):
 interest (10000, 0.02, 5)
 
 
-# In[4]:
+# In[1]:
 
 
 def body_mass_index(weight, height):
@@ -177,17 +177,25 @@ def body_mass_index(weight, height):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    h_ft = height[0]
-    h_inch = height[1]
-    weightkg=weight*0.453592
-    heightinch=(h_ft*12)+h_inch
-    heightm=heightinch*0.0254
-    BMI=weightkg/(heightm**2)
-    return BMI
+    weight_kg = weight * 0.453592
+
+    height_feet = height[0]
+    height_inches = height[1]
+    height_meters = (height_feet * 0.3048) + (height_inches * 0.0254)
+
+    bmi = weight_kg / (height_meters ** 2)
+
+    return bmi
 
 
-# In[5]:
+# In[2]:
 
 
 body_mass_index(75,[5,6])
+
+
+# In[ ]:
+
+
+
 
